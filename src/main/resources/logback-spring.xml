@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	
+    <!-- Propiedades comunes -->
+    <property name="LOG_PATTERN" value="${logging.pattern.console}"/>
+    <property name="LOG_FILE_PATTERN" value="${logging.pattern.file}"/>
+    <property name="LOG_PATH" value="${logging.file.name:-logs/applogback.log}"/>
+
+    <!-- Appender de consola (solo para dev) -->
+    <springProfile name="dev">
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <!-- Appender de archivo simple (para dev y test) -->
+    <springProfile name="dev | test">
+        <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+            <file>${LOG_PATH}</file>
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+<!-- Appender con rotacion (para prod) -->
+    <springProfile name="prod">
+        <appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+                <!-- Rotacion diaria -->
+                <maxFileSize>10MB</maxFileSize>
+                <!-- Mantener logs por 30 dias -->
+                <maxHistory>30</maxHistory>
+                <!-- Rotar cuando el archivo alcance 1GB -->
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+    
+    <!-- Configuracion de loggers segun perfil -->
+    <root level="${logging.level.root}">
+        <springProfile name="dev">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="FILE"/>
+        </springProfile>
+        <springProfile name="test">
+            <appender-ref ref="FILE"/>
+        </springProfile>
+        <springProfile name="prod">
+        	<!--<appender-ref ref="FILE"/>-->
+           <appender-ref ref="ROLLING_FILE"/>
+        </springProfile>
+    </root>
+
+    
+</configuration>
