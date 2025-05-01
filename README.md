@@ -1,3 +1,16 @@
+# **LogBack**
+
+# Índice
+### Definición del proyecto
+### Sobre Logback
+### Niveles del log
+### Appender del log
+### Consideraciones finales
+### Comandos para crear el artefacto según perfil
+### Probar aplicación
+
+### Índice de proyectos Spring Boot
+
 
 #  **Definición del proyecto**
 
@@ -7,36 +20,7 @@ Contiene una configuración para ser ejecutada en tres ambientes distintos: desa
 
 Cada ambiente tendrá levels y appenders distintos.
 
-##  **Comandos para crear el artefacto según perfil**
-
-
-Crea el artefacto con el Profile Activo por default(dev):
-
-**mvn clean package -DskipTests**
-
-Crea el artefacto con el Profile Activo en dev:
-
-**mvn clean package -DskipTests -P dev**
-
-Crea el artefacto con el Profile Activo en test:
-
-**mvn clean package -DskipTests -P test**
-
-Crea el artefacto con el Profile Activo en prod:
-
-**mvn clean package -DskipTests -P prod**
-
-##  **Probar aplicación**
-
- Opciones:
- 
- 1:
- 
-  **curl -X GET "http://localhost:8080/api/v1/test"**
- 
- 2:	
- 
-	 http://localhost:8080/swagger-ui/index.html
+Pero primero, aclaremos el marco teorico del proyecto (Logback, level, appender).
 
 
 #  **Sobre Logback**
@@ -82,7 +66,7 @@ DEBUG es el nivel más bajo, ERROR es el más alto:
 **DEBUG < INFO < WARN < ERROR**
 
 
-###  **Appender del log**
+##  **Appender del log**
 Existen diferentes maneras que se puede mostrar la información:
 - STDOUT: consola.
 - FILE: archivo. El nombre y la ubicación dependen de la configuración.
@@ -93,10 +77,47 @@ Existen diferentes maneras que se puede mostrar la información:
 - test: FILE
 - prod: ROLLING_FILE
 
-###  **Consideraciones finales**
+##  **Consideraciones finales**
 No registrar información sensible en producción.
 
 No guardar datos como contraseñas, tokens o información de usuarios en logs.
 
 Evitar DEBUG en producción, ya que puede revelar datos internos.
 
+
+##  **Comandos para crear el artefacto según perfil**
+
+
+Crea el artefacto con el Profile Activo por default(dev):
+
+**mvn clean package -DskipTests**
+
+Crea el artefacto con el Profile Activo en dev:
+
+**mvn clean package -DskipTests -P dev**
+
+Crea el artefacto con el Profile Activo en test:
+
+**mvn clean package -DskipTests -P test**
+
+Crea el artefacto con el Profile Activo en prod:
+
+**mvn clean package -DskipTests -P prod**
+
+##  **Probar aplicación**
+
+ Opciones:
+ 
+ 1:
+ 
+  **curl -X GET "http://localhost:8080/api/v1/test"**
+ 
+ 2:	
+ 
+	 http://localhost:8080/swagger-ui/index.html
+
+
+# Índice de proyectos Spring Boot
+- [Response Uniforme](https://github.com/pabloEmanuelIgoldi/Spring-Boot-Response-Wrapper)
+- [LogBack](https://github.com/pabloEmanuelIgoldi/applogback)
+- [Profile](https://github.com/pabloEmanuelIgoldi/appProfile)
