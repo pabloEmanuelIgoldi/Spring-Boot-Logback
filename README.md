@@ -123,3 +123,4 @@ Crea el artefacto con el Profile Activo en prod:
 - [Profile](https://github.com/pabloEmanuelIgoldi/Spring-Boot-Profile)
 - [Spring Doc](https://github.com/pabloEmanuelIgoldi/Spring-Boot-Swagger)
 - [Validate](https://github.com/pabloEmanuelIgoldi/Spring-Boot-Validate)
+- [Inter-Service Communication](https://github.com/pabloEmanuelIgoldi/Spring-Boot-Inter-Service-Communication)
